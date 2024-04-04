@@ -7,6 +7,15 @@ export default function Question({ index, onSkipAnswer, onSelectAnswer }) {
     selectedAnswer: "",
     isCorrect: null,
   });
+
+  let timer = 5000
+  if(answer.selectedAnswer){
+    timer = 1000
+  }
+  if(answer.isCorrect!=null){
+    timer = 2000
+  }
+
   function handleSelectAnswer(answer) {
     setAnswer({ selectedAnswer: answer, isCorrect: null });
     setTimeout(() => {
@@ -28,7 +37,7 @@ export default function Question({ index, onSkipAnswer, onSelectAnswer }) {
   }
   return (
     <div id="question">
-      <QuestionTimer timeout={5000} onTimeout={onSkipAnswer} />
+      <QuestionTimer key={timer} timeout={timer} onTimeout={answer.selectedAnswer ==='' ? onSkipAnswer : null} />
       <h2>{QUESTIONS[index].text}</h2>
       <Answers
         answers={QUESTIONS[index].answers}

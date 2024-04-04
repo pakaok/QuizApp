@@ -22,6 +22,5 @@ export default function QuestionTimer({ timeout, onTimeout }) {
     };
   }, []);
 
-//   console.log('d')
   return <progress value={remainingTime} max={timeout} />;
 }
